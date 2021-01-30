@@ -3,8 +3,6 @@ from env import FONT, TRAVIS_GIF
 from io import BytesIO
 from discord.ext import commands
 import discord
-import textwrap
-
 
 def setup(bot):
     bot.add_cog(Generate(bot))

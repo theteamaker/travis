@@ -1,5 +1,5 @@
 from PIL import Image, ImageDraw, ImageFont, ImageSequence
-from env import FONT, TRAVIS_GIF, ERROR_GIF
+from env import FONT, TRAVIS_GIF
 from io import BytesIO
 from discord.ext import commands
 import discord

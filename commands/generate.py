@@ -5,14 +5,16 @@ from discord.ext import commands
 import discord
 import textwrap
 
+
 def setup(bot):
     bot.add_cog(Generate(bot))
+
 
 class Generate(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(aliases=[''])
+    @commands.command(aliases=[""])
     async def generate(self, ctx, *, arg):
         await ctx.trigger_typing()
 
@@ -20,11 +22,7 @@ class Generate(commands.Cog):
 
         W, H = gif.size
 
-        img = Image.new(
-            'RGBA',
-            (W, H),
-            (255, 0, 0, 0)
-        )
+        img = Image.new("RGBA", (W, H), (255, 0, 0, 0))
 
         font = ImageFont.truetype(FONT, 40)
         image_layer = ImageDraw.Draw(img)
@@ -49,24 +47,30 @@ class Generate(commands.Cog):
 
             return lines
 
-        current_y = 50  # all alignment values are hardcoded because i'm not good with maths
+        current_y = (
+            50  # all alignment values are hardcoded because i'm not good with maths
+        )
 
-        for i in wrap(caption):    
-            image_layer.text(((W / 2), current_y), i, font=font, fill="white", anchor="mb")
+        for i in wrap(caption):
+            image_layer.text(
+                ((W / 2), current_y), i, font=font, fill="white", anchor="mb"
+            )
             current_y += 45
 
         if current_y > 340:
             await ctx.send("too many words vro")
             return
-        
+
         else:
             frames = []
             for frame in ImageSequence.Iterator(gif):
-                frame = frame.copy().convert('RGBA')
+                frame = frame.copy().convert("RGBA")
                 frame.paste(img, mask=img)
                 frames.append(frame)
 
         with BytesIO() as output:
-            frames[0].save(output, "GIF", save_all=True, optimize=True, append_images=frames[1:])
+            frames[0].save(
+                output, "GIF", save_all=True, optimize=True, append_images=frames[1:]
+            )
             output.seek(0)
             await ctx.send(file=discord.File(fp=output, filename="output.gif"))

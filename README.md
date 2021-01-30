@@ -1,0 +1,1 @@
+![](https://tenor.com/view/no-more-heroes-gif-19733049)

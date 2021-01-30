@@ -70,7 +70,7 @@ class Generate(commands.Cog):
 
         with BytesIO() as output:
             frames[0].save(
-                output, "GIF", save_all=True, optimize=True, append_images=frames[1:]
+                output, "GIF", save_all=True, append_images=frames[1:]
             )
             output.seek(0)
             await ctx.send(file=discord.File(fp=output, filename="output.gif"))

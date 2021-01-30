@@ -11,6 +11,6 @@ RUN mkdir /app/data
 
 WORKDIR /app
 
-RUN pip install -r requirements.txt && apt remove gcc -y && apt autoremove -y
+RUN pip install -r requirements.txt
 
 CMD python main.py

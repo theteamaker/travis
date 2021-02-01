@@ -50,8 +50,9 @@ class Generate(commands.Cog):
         )
 
         for i in wrap(caption):
+            print(current_y)
             image_layer.text(
-                ((W / 2), current_y), i, font=font, fill="white", anchor="mb"
+                ((W / 2), current_y), i, font=font, fill="white", anchor="ms"
             )
             current_y += 45
 
